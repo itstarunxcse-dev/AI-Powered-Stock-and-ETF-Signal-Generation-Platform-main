@@ -1,8 +1,7 @@
 # AI-Powered Stock & ETF Signal Generation Platform
 
-> **Repository:** [https://github.com/itstarunxcse-dev/AI-Powered-Stock-and-ETF-Signal-Generation-Platform-main](https://github.com/itstarunxcse-dev/AI-Powered-Stock-and-ETF-Signal-Generation-Platform-main)  
 > **Version 2.3.0** - Hybrid Signal Intelligence Update  
-> **Updated:** January 28, 2026
+> **Updated:** January 13, 2026
 
 A comprehensive trading signal platform that combines **Machine Learning** (Random Forest + XGBoost) with **Technical Analysis** (RSI, MACD, SMA) to generate high-confidence stock predictions. Features a modern Glassmorphism dashboard, smart email alerts, and a resilient microservices architecture.
 
@@ -13,23 +12,15 @@ A comprehensive trading signal platform that combines **Machine Learning** (Rand
 ### Windows (Recommended)
 The easiest way to start all services (Dashboard + API + Alerts + Backtesting):
 
-1. **Navigate to the Scripts directory:**
-   ```powershell
-   cd Scripts
-   ```
-
-2. **Run the startup script:**
-   ```powershell
-   ./run_project.ps1
-   ```
-   *This script automatically starts the backend API, the alerts scheduler, and the Streamlit dashboard in the correct order.*
+```powershell
+./run_project.ps1
+```
+*This script automatically starts the backend API, the alerts scheduler, and the Streamlit dashboard in the correct order.*
 
 ### Manual Start
-If you prefer running components individually, navigate to the `Scripts` folder and run:
+If you prefer running components individually:
 
 ```bash
-cd Scripts
-
 # Terminal 1: Start Backend API
 python signals/api.py
 
@@ -86,7 +77,7 @@ The platform operates on a microservices architecture, ensuring scalability and 
          |                          |   | (Fetcher/Pipeline)|
          |                          v   +-------------------+
          |                  +-------------------+
-         |                  +----------------->|  Alerts Service   |
+         +----------------->|  Alerts Service   |
                             | (Email Notifications) |
                             +-------------------+
 ```
@@ -100,10 +91,10 @@ The platform operates on a microservices architecture, ensuring scalability and 
 
 ## 📂 Project Structure Guide
 
-Here is a detailed breakdown of the codebase organization (inside `Scripts/`):
+Here is a detailed breakdown of the codebase organization:
 
 ```
-AI POWERED SIGNALS/Scripts/
+AI POWERED SIGNALS/
 │
 ├── 0_Overview.py          # 🏠 Main Entry Point for the Dashboard
 ├── run_project.ps1        # 🚀 One-Click Startup Script for Windows
@@ -146,6 +137,37 @@ AI POWERED SIGNALS/Scripts/
 
 ---
 
+## 📡 API Endpoints
+
+**Base URL:** `http://127.0.0.1:8000`
+
+### System & Pipeline
+- `GET /health` - Health check
+- `POST /run-pipeline` - Trigger data pipeline
+
+### Stock Data & Charts
+- `GET /supabase/recent/{ticker}?days=30` - Recent data
+- `GET /supabase/ticker/{ticker}?start_date=2024-01-01&limit=100` - Historical data
+
+### Market Overview
+- `GET /supabase/latest?limit=10` - Latest market data
+- `GET /supabase/top-performers?top_n=10` - Top performers
+
+### Analysis
+- `GET /supabase/stats/{ticker}?start_date=2024-01-01` - Statistics
+- `GET /supabase/rsi-search?min_rsi=0&max_rsi=30` - RSI-based search
+
+---
+
+## 🧪 Testing
+
+```bash
+# Test all API endpoints
+python test_api_endpoints.py
+```
+
+---
+
 ## 📡 Core API Endpoints
 
 ### Predictions
@@ -170,5 +192,5 @@ AI POWERED SIGNALS/Scripts/
 
 ---
 
-**Original Author:** Aman (DE Team)
+**Built by:** Batch 8-9-10 of Infosys Springboard Virtual Internship Program  
 **License:** MIT
